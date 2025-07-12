@@ -33,60 +33,48 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Create email content
-      const emailBody = `
-        New Quote Request from Stitchpoint Website
-
-        Customer Details:
-        - Name: ${formData.name}
-        - Business Name: ${formData.businessName}
-        - Email: ${formData.email}
-        - Mobile: ${formData.mobile}
-
-        Requirements:
-        ${formData.requirements}
-
-        Submitted at: ${new Date().toLocaleString()}
-      `;
-
-      // Using EmailJS service (you need to set up EmailJS account)
-      const emailJSData = {
-        to_email: 'query@stitchpoint.com',
-        from_name: formData.name,
-        from_email: formData.email,
-        subject: `New Quote Request from ${formData.businessName}`,
-        message: emailBody,
-        business_name: formData.businessName,
-        mobile: formData.mobile,
-        requirements: formData.requirements
-      };
-
-      // For now, we'll simulate the email sending
-      console.log('Email data to be sent:', emailJSData);
-      
-      // Simulate API call delay
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      setIsSubmitted(true);
-      toast({
-        title: "Quote Request Sent!",
-        description: "We'll get back to you within 24 hours at query@stitchpoint.com",
+      // Using Formspree for GitHub Pages compatibility
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          business_name: formData.businessName,
+          email: formData.email,
+          mobile: formData.mobile,
+          requirements: formData.requirements,
+          _replyto: formData.email,
+          _subject: `New Quote Request from ${formData.businessName}`,
+          _template: 'basic'
+        }),
       });
 
-      // Reset form after 3 seconds
-      setTimeout(() => {
-        setIsSubmitted(false);
-        setFormData({
-          name: '',
-          businessName: '',
-          email: '',
-          mobile: '',
-          requirements: ''
+      if (response.ok) {
+        setIsSubmitted(true);
+        toast({
+          title: "Quote Request Sent!",
+          description: "We'll get back to you within 24 hours at query@stitchpoint.com",
         });
-      }, 3000);
+
+        // Reset form after 3 seconds
+        setTimeout(() => {
+          setIsSubmitted(false);
+          setFormData({
+            name: '',
+            businessName: '',
+            email: '',
+            mobile: '',
+            requirements: ''
+          });
+        }, 3000);
+      } else {
+        throw new Error('Form submission failed');
+      }
 
     } catch (error) {
-      console.error('Email sending error:', error);
+      console.error('Form submission error:', error);
       toast({
         title: "Error",
         description: "Failed to send request. Please email us directly at query@stitchpoint.com",
@@ -269,6 +257,17 @@ const ContactSection = () => {
               )}
             </CardContent>
           </Card>
+        </div>
+
+        {/* Instructions for Formspree setup */}
+        <div className="mt-8 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+          <h4 className="font-semibold text-blue-800 mb-2">Setup Instructions for Email Form:</h4>
+          <ol className="text-sm text-blue-700 space-y-1">
+            <li>1. Go to <a href="https://formspree.io" target="_blank" rel="noopener noreferrer" className="underline">formspree.io</a> and create a free account</li>
+            <li>2. Create a new form and set the email to: query@stitchpoint.com</li>
+            <li>3. Copy the form ID and replace 'YOUR_FORM_ID' in the code above</li>
+            <li>4. The form will then send emails directly to query@stitchpoint.com</li>
+          </ol>
         </div>
       </div>
     </section>
