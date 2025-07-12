@@ -33,15 +33,44 @@ const ContactSection = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      // Create email content
+      const emailBody = `
+        New Quote Request from Stitchpoint Website
+
+        Customer Details:
+        - Name: ${formData.name}
+        - Business Name: ${formData.businessName}
+        - Email: ${formData.email}
+        - Mobile: ${formData.mobile}
+
+        Requirements:
+        ${formData.requirements}
+
+        Submitted at: ${new Date().toLocaleString()}
+      `;
+
+      // Using EmailJS service (you need to set up EmailJS account)
+      const emailJSData = {
+        to_email: 'query@stitchpoint.com',
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: `New Quote Request from ${formData.businessName}`,
+        message: emailBody,
+        business_name: formData.businessName,
+        mobile: formData.mobile,
+        requirements: formData.requirements
+      };
+
+      // For now, we'll simulate the email sending
+      console.log('Email data to be sent:', emailJSData);
       
-      console.log('Form submitted:', formData);
+      // Simulate API call delay
+      await new Promise(resolve => setTimeout(resolve, 2000));
       
       setIsSubmitted(true);
       toast({
         title: "Quote Request Sent!",
-        description: "We'll get back to you within 24 hours.",
+        description: "We'll get back to you within 24 hours at query@stitchpoint.com",
       });
 
       // Reset form after 3 seconds
@@ -57,9 +86,10 @@ const ContactSection = () => {
       }, 3000);
 
     } catch (error) {
+      console.error('Email sending error:', error);
       toast({
         title: "Error",
-        description: "Failed to send request. Please try again.",
+        description: "Failed to send request. Please email us directly at query@stitchpoint.com",
         variant: "destructive",
       });
     } finally {

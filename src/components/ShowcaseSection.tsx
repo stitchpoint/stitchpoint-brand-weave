@@ -14,35 +14,35 @@ const ShowcaseSection = () => {
       category: 'Schools',
       title: 'School Uniform Collection',
       description: 'Complete uniform set with logo embroidery',
-      image: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1517022812141-23620dba5c23?w=400&h=300&fit=crop'
     },
     {
       id: 2,
       category: 'Corporate',
       title: 'Corporate Polo Shirts',
       description: 'Professional polo shirts with company branding',
-      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1487958449943-2429e8be8625?w=400&h=300&fit=crop'
     },
     {
       id: 3,
       category: 'Security',
       title: 'Security Guard Uniforms',
       description: 'Durable uniforms with reflective strips and badges',
-      image: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1605810230434-7631ac76ec81?w=400&h=300&fit=crop'
     },
     {
       id: 4,
       category: 'Hotels',
       title: 'Hotel Staff Uniforms',
       description: 'Elegant hospitality uniforms with custom embroidery',
-      image: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1466442929976-97f336a657be?w=400&h=300&fit=crop'
     },
     {
       id: 5,
       category: 'Factories',
       title: 'Industrial Workwear',
       description: 'Heavy-duty workwear with safety features',
-      image: 'https://images.unsplash.com/photo-1483058712412-4245e9b90334?w=400&h=300&fit=crop'
+      image: 'https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=400&h=300&fit=crop'
     },
     {
       id: 6,
