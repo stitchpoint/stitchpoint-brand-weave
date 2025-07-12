@@ -16,11 +16,8 @@ export default defineConfig(({ command }) => {
         "@": path.resolve(__dirname, "./src"),
       },
     },
+    base: command === 'serve' ? '/' : '/',
   };
-
-  if (command !== 'serve') {
-    config.base = '/';
-  }
 
   return config;
 });
